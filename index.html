@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+
+<head lang="en">
+    <title>vue mdl select</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, 
+    width=device-width" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/0.7.13/vue-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.8.0/vue-resource.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/getmdl-select.min.css">
+    <script src="./assets/js/getmdl-select.min.js"></script>
+</head>
+
+<body>
+    <!-- mdl_vue js Select -->
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth getmdl-select__fix-height">
+        <input class="mdl-textfield__input" type="text" id="sample1"  readonly tabIndex="-1">
+        <label for="sample1" class="mdl-textfield__label">Country</label>
+        <ul id="example-1" for="sample1" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+            <li class="mdl-menu__item" v-for="item in items">{{ item.country }}</li>
+
+        </ul>
+    </div>
+    <script>
+        var example1 = new Vue({
+            el: '#example-1',
+            data: {
+                items: [{
+                    country: "Afghanistan"
+                }, {
+                    country: "Åland Islands"
+                }, {
+                    country: "Albania"
+                }, {
+                    country: "Algeria"
+                }, {
+                    country: "American Samoa"
+                }, {
+                    country: "Andorra"
+                }, {
+                    country: "Angola"
+                }, {
+                    country: "Anguilla"
+                }, {
+                    country: "Antarctica"
+                }, {
+                    country: "Antigua and Barbuda"
+                }, {
+                    country: "Argentina"
+                }, {
+                    country: "Armenia"
+                }, {
+                    country: 'Belarus'
+                }, {
+                    country: 'Germany'
+                }, {
+                    country: 'Russia'
+                }, {
+                    country: 'Belarus'
+                }, {
+                    country: 'Germany'
+                }, {
+                    country: 'Russia'
+                }]
+            }
+        })
+    </script>
+</body>
+
+</html>
