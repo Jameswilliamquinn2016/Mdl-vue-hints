@@ -10,77 +10,79 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/0.7.13/vue-router.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.8.0/vue-resource.min.js"></script>
 </head>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
 
 <body>
-    <div id="demo">
-        <h2>demo</h2>
-        <pre>{{$data.results.geojson | json}}</pre>
+    <div id="MapitWardID">
+        <h2>MapitWardID</h2>
+        <pre>{{$data.results.MapitWardID | json}}</pre>
     </div>
 
-    <div id="demo2">
-        <h2>demo2</h2>
-        <pre>{{$data.results.postcodes | json}}</pre>
+    <div id="postcodesLngLatValues">
+        <h2>postcodesLngLatValues</h2>
+        <pre>{{$data.results.postcodesLngLatValues | json}}</pre>
     </div>
 
-    <div id="demo3">
-        <h2>demo3</h2>
-        <pre>{{$data.results.address | json}}</pre>
+    <div id="addressThoroughfareName">
+        <h2>addressThoroughfareName</h2>
+        <pre>{{$data.results.addressThoroughfareName | json}}</pre>
     </div>
-    <div id="demo4">
-        <h2>demo4</h2>
-        <pre>{{$data.results.railway_stations | json}}</pre>
+    <div id="railwayStationsLngLatValues">
+        <h2>railwayStationsLngLatValues</h2>
+        <pre>{{$data.results.railwayStationsLngLatValues | json}}</pre>
     </div>
     <script>
-        // derived from postcode
         Vue.http.get('http://api.postcodes.io/postcodes/SE1 6EE').then((response) => {
-            global.results.postcodes = response.data.result;
+            globalApiCollection.results.postcodesLngLatValues = response.data.result;
 
         });
         Vue.http.get('https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?postcode=SE1 6EE&format=JSON&key=IAEi9RGdc9sitkGDTGbZNPd8gu4GFiXG').then((response) => {
-            // success callback
-            global.results.address = response.data.results;
+            globalApiCollection.results.addressThoroughfareName = response.data.results;
 
         });
         Vue.http.get('https://data.gov.uk/data/api/service/transport/naptan_railway_stations/postcode?postcode=SE1 6EE&distance=2').then((response) => {
-            // success callback
-            global.results.railway_stations = response.data.result;
+            globalApiCollection.results.railwayStationsLngLatValues = response.data.result;
 
         });
 
         Vue.http.get('http://mapit.mysociety.org/postcode/SE1 6EE.json').then((response) => {
             // success callback
-            global.results.geojson = response.data;
+            globalApiCollection.results.MapitWardID = response.data;
 
         });
 
 
 
 
-        var global = {
+        var globalApiCollection = {
             results: {
-                geojson: '',
-                postcodes: '',
-                address: '',
-                railway_stations: ''
+                MapitWardID: [],
+                postcodesLngLatValues: [],
+                addressThoroughfareName: [],
+                railwayStationsLngLatValues: []
             },
         }; //Define global variable function
 
         new Vue({
-            el: '#demo',
-            data: global
+            el: '#MapitWardID',
+            data: globalApiCollection
         });
 
         new Vue({
-            el: '#demo2',
-            data: global
+            el: '#postcodesLngLatValues',
+            data: globalApiCollection
         });
         new Vue({
-            el: '#demo3',
-            data: global
+            el: '#addressThoroughfareName',
+            data: globalApiCollection
         });
         new Vue({
-            el: '#demo4',
-            data: global
+            el: '#railwayStationsLngLatValues',
+            data: globalApiCollection
         });
     </script>
 </body>
