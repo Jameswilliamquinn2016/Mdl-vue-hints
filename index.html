@@ -23,9 +23,11 @@
             width: 20em;
         }
         body {
-            background-image: url(https://source.unsplash.com/category/buildings/1280x854);
+            background-image: url(https://source.unsplash.com/category/buildings/960x400);
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: contain;
+            background-position: top center;
+            background-color: white;
         }
         .mdl-background {
             background-color: rgba(255, 255, 255, 0.8);
@@ -34,51 +36,152 @@
     </style>
 
 
+
+
     <!-- mdl_vue js Select -->
 
-    <div id="example-1" class="mdl-background mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth getmdl-select__fix-height">
-        <input v-model="item.property" class="mdl-textfield__input" type="text" id="sample1" readonly tabIndex="-1">
-        <label for="sample1" class="mdl-textfield__label">Property Type</label>
-        <ul for="sample1" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-            <li class="mdl-menu__item" v-for="item in items">{{ item.property | uppercase }}</li>
-        </ul>
-        <h1><pre>{{item | json}}</pre></h1>
+    <div style="width:25em;" class="mdl-background" id="example-1">
+        <div class="getmdl-select__fullwidth mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+            <input v-model="item.property" class="mdl-textfield__input" type="text" id="sample1" readonly tabIndex="-1">
+            <label for="sample1" class="mdl-textfield__label">Property Type</label>
+            <ul for="sample1" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                <li class="mdl-menu__item" v-for="item in items" v-bind:value="item.value">{{ item.property | uppercase }}</li>
+            </ul>
+
+        </div>
+
+        <span><pre>from item: {{item | json}}</pre></span>
+    </div>
+
+    <!-- Textfield with Floating Label -->
+
+    <div style="width:25em;" class="mdl-background" id="example-2">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input v-model="messages.message" class="mdl-textfield__input" type="text" id="sample3">
+            <label class="mdl-textfield__label" for="sample3">Text...</label>
+        </div>
+        <span><pre>from messages: {{messages | json}}</pre></span>
+    </div>
+    <div style="width:11em;" class="mdl-background" id="demo">
+
+
+
+        <!-- switch -->
+        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+            <input v-model="switched" type="checkbox" id="switch-1" class="mdl-switch__input">
+            <span class="mdl-switch__label">Switch</span>
+        </label>
+
+
+        <span><pre>switch: {{switched ? "on" : "off" | json}}</pre></span>
+
+        <!-- radio buttons -->
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+            <input v-model="picked" type="radio" id="option-1" class="mdl-radio__button" name="picked" value="one">
+        </label>
+
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+            <input v-model="picked" type="radio" id="option-2" class="mdl-radio__button" name="picked" value="two">
+        </label>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
+            <input v-model="picked" type="radio" id="option-3" class="mdl-radio__button" name="picked" value="three">
+        </label>
+
+
+        <span><pre>radio: {{picked | json}}</pre></span>
+
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="jack">
+            <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" class="mdl-checkbox__input">
+            <span class="mdl-checkbox__label">Jack</span>
+        </label>
+
+
+
+
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="john">
+            <input type="checkbox" id="john" value="John" v-model="checkedNames" class="mdl-checkbox__input">
+            <span class="mdl-checkbox__label">John</span>
+        </label>
+
+
+
+
+
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="mike">
+            <input type="checkbox" id="mike" value="Mike" v-model="checkedNames" class="mdl-checkbox__input">
+            <span class="mdl-checkbox__label">Mike</span>
+        </label>
+
+
+
+
+
+        <span><pre>Checked names: {{ checkedNames | json }}</pre></span>
     </div>
 
 
 
 
+
     <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                switched: true,
+                checked: true,
+                picked: 'one',
+                checkedNames: []
+
+            }
+        })
+        var data = {
+            messages: {
+                message: "Hello World!..Let's talk"
+            },
+
+            switched: true,
+            checked: true,
+            picked: 'one',
+            checkedNames: [],
+            items: [{
+                property: "Not Specified"
+            }, {
+                property: "Terraced House"
+            }, {
+                property: "Semi-detached house"
+            }, {
+                property: "Detached house"
+            }, {
+                property: "Mews house"
+            }, {
+                property: "Flat"
+            }, {
+                property: "Studio flat"
+            }, {
+                property: "Maisonette"
+            }, {
+                property: "Town house"
+            }, {
+                property: "Apartment"
+            }, {
+                property: "Penthouse"
+            }, {
+                property: "Serviced apartment"
+            }, {
+                property: "Off-Plan"
+            }]
+        }
         var example1 = new Vue({
             el: '#example-1',
+            data: data
+        });
+
+        var demo = new Vue({
+            el: '#example-2',
             data: {
-                items: [{
-                    property: "Not Specified"
-                }, {
-                    property: "Terraced House"
-                }, {
-                    property: "Semi-detached house"
-                }, {
-                    property: "Detached house"
-                }, {
-                    property: "Mews house"
-                }, {
-                    property: "Flat"
-                }, {
-                    property: "Studio flat"
-                }, {
-                    property: "Maisonette"
-                }, {
-                    property: "Town house"
-                }, {
-                    property: "Apartment"
-                }, {
-                    property: "Penthouse"
-                }, {
-                    property: "Serviced apartment"
-                }, {
-                    property: "Off-Plan"
-                }]
+                messages: {
+                    message: "Hello World!..Let's talk"
+                }
             }
         })
     </script>
