@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+<head lang="en">
+    <title>vue resource $hhtp get calls</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, 
+    width=device-width" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/0.7.13/vue-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.8.0/vue-resource.min.js"></script>
+</head>
+
+<body>
+    <div id="demo">
+        <h2>demo</h2>
+        <pre>{{$data.results.geojson | json}}</pre>
+    </div>
+
+    <div id="demo2">
+        <h2>demo2</h2>
+        <pre>{{$data.results.postcodes | json}}</pre>
+    </div>
+
+    <div id="demo3">
+        <h2>demo3</h2>
+        <pre>{{$data.results.address | json}}</pre>
+    </div>
+    <div id="demo4">
+        <h2>demo4</h2>
+        <pre>{{$data.results.railway_stations | json}}</pre>
+    </div>
+    <script>
+        // derived from postcode
+        Vue.http.get('http://api.postcodes.io/postcodes/SE1 6EE').then((response) => {
+            global.results.postcodes = response.data.result;
+
+        });
+        Vue.http.get('https://api.ordnancesurvey.co.uk/places/v1/addresses/postcode?postcode=SE1 6EE&format=JSON&key=IAEi9RGdc9sitkGDTGbZNPd8gu4GFiXG').then((response) => {
+            // success callback
+            global.results.address = response.data.results;
+
+        });
+        Vue.http.get('https://data.gov.uk/data/api/service/transport/naptan_railway_stations/postcode?postcode=SE1 6EE&distance=2').then((response) => {
+            // success callback
+            global.results.railway_stations = response.data.result;
+
+        });
+
+        Vue.http.get('http://mapit.mysociety.org/postcode/SE1 6EE.json').then((response) => {
+            // success callback
+            global.results.geojson = response.data;
+
+        });
+
+
+
+
+        var global = {
+            results: {
+                geojson: '',
+                postcodes: '',
+                address: '',
+                railway_stations: ''
+            },
+        }; //Define global variable function
+
+        new Vue({
+            el: '#demo',
+            data: global
+        });
+
+        new Vue({
+            el: '#demo2',
+            data: global
+        });
+        new Vue({
+            el: '#demo3',
+            data: global
+        });
+        new Vue({
+            el: '#demo4',
+            data: global
+        });
+    </script>
+</body>
+
+</html>
