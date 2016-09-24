@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+<head lang="en">
+    <title>vue mdl select</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, 
+    width=device-width" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/0.7.13/vue-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.8.0/vue-resource.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/getmdl-select.min.css">
+    <script src="./assets/js/getmdl-select.min.js"></script>
+    <!--
+    <script defer src="https://cdn.jsdelivr.net/headroomjs/0.7.0/headroom.min.js"></script>
+    -->
+</head>
+
+<body>
+    <style>
+        .getmdl-select__fullwidth {
+            width: 20em;
+        }
+        body {
+            background-image: url(https://source.unsplash.com/category/buildings/960x400);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: top center;
+            background-color: black;
+        }
+        .mdl-background {
+            background-color: rgba(255, 255, 255, 0.9);
+            /* quickfix during build, to be removed...  */
+        }
+    </style>
+
+
+
+
+    <!-- mdl_vue js Select -->
+
+    <div style="width:25em;" class="mdl-background" id="example-1">
+        <div class="getmdl-select__fullwidth mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+            <input v-model="item.property" class="mdl-textfield__input" type="text" id="sample1" readonly tabIndex="-1">
+            <label for="sample1" class="mdl-textfield__label">Property Type</label>
+            <ul for="sample1" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                <li class="mdl-menu__item" v-for="item in items" v-bind:value="item.value">{{ item.property | lowercase }}</li>
+            </ul>
+
+        </div>
+
+        <span><pre>{{$data | json}}</pre></span>
+        
+        <h1>{{ item.property }}</h1>
+    </div>
+
+   
+    <script>
+        
+        var data = {
+    "item": null,
+    "items": [
+        {
+            "property": "NotSpecified"
+        },
+        {
+            "property": "Terraced House"
+        },
+        {
+            "property": "Semi-detached house"
+        },
+        {
+            "property": "Detached house"
+        },
+        {
+            "property": "Mews house"
+        },
+        {
+            "property": "Flat"
+        },
+        {
+            "property": "Studio flat"
+        }
+    ]
+}
+        
+        
+      
+        var example1 = new Vue({
+            el: '#example-1',
+            data: data
+        });
+
+    </script>
+</body>
+
+</html>
