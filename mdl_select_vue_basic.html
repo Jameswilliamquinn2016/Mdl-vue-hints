@@ -44,25 +44,25 @@
 
     <div style="width:25em;" class="mdl-background" id="example-1">
         <div class="getmdl-select__fullwidth mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
-            <input v-model="item.property" class="mdl-textfield__input" type="text" id="sample1" readonly tabIndex="-1">
+            <input v-model="propertyItem.property" class="mdl-textfield__input" type="text" id="sample1" readonly tabIndex="-1">
             <label for="sample1" class="mdl-textfield__label">Property Type</label>
             <ul for="sample1" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                <li class="mdl-menu__item" v-for="item in items" v-bind:value="item.value">{{ item.property | lowercase }}</li>
+                <li class="mdl-menu__item" v-for="propertyItem in propertyItems" v-bind:value="propertyItem.value">{{ propertyItem.property | lowercase }}</li>
             </ul>
 
         </div>
 
         <span><pre>{{$data | json}}</pre></span>
         
-        <h1>{{ item.property }}</h1>
+        <h1>{{ propertyItem.property }}</h1>
     </div>
 
    
     <script>
         
         var data = {
-    "item": null,
-    "items": [
+    "propertyItem": null,
+    "propertyItems": [
         {
             "property": "NotSpecified"
         },
