@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
     <!--
-    <link rel="stylesheet" href="./assets/css/getmdl-select.min.css">
-    <script src="./assets/js/getmdl-select.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <script src="./assets/js/main.js"></script>
     -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.14.0/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.2/lodash.min.js"></script>
@@ -33,7 +33,10 @@
             <input v-model="question">
         </p>
         <p>{{ answer }}</p>
-        <h1><pre>{{ $data | json}}</pre></h1>
+        <p>{{ forced }}</p>
+        <img src="{{ image }}">
+        
+        <pre>{{ $data | json}}</pre>
     </div>
 
 
@@ -42,7 +45,8 @@
             el: '#watch-example',
             data: {
                 question: '',
-                answer: 'I cannot give you an answer until you ask a question!'
+                answer: 'I cannot give you an answer until you ask a question!', 'image':'',
+                'forced':''
             },
             watch: {
                 // whenever question changes, this function will run
@@ -69,7 +73,10 @@
                         vm.answer = 'Thinking...'
                         axios.get('https://yesno.wtf/api')
                             .then(function(response) {
-                                vm.answer = _.capitalize(response.data.answer)
+                                vm.answer = _.capitalize(response.data.answer),
+                                    vm.image =(response.data.image),
+                                    vm.forced =(response.data.forced)
+                                    
                             })
                             .catch(function(error) {
                                 vm.answer = 'Error! Could not reach the API. ' + error
