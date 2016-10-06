@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS scroll Snap Points Polyfill example</title>
+
+</head>
+
+<body>
+    <style>
+        .gallery-wrapper {
+            max-width: 80em;
+            height: 0;
+            padding-bottom: 42.7%;
+            overflow: hidden;
+        }
+        .gallery {
+            width: 100%;
+            -webkit-scroll-behavior: smooth;
+            scroll-behavior: smooth;
+            -webkit-scroll-snap-type: mandatory;
+            scroll-snap-type: mandatory
+        }
+        .horizontal-gallery .gallery {
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            font-size: 0px;
+            -webkit-scroll-snap-points-x: repeat(100%);
+            scroll-snap-points-x: repeat(100%)
+        }
+        .box {
+            width: 100%
+        }
+        .horizontal-gallery .box {
+            display: inline-block;
+            white-space: normal
+        }
+    </style>
+    <h1>1st</h1>
+    <div class="gallery-wrapper horizontal-gallery">
+        <div class="gallery">
+            <img class="box" src="https://unsplash.it/1280/854?image=0" alt="">
+            <img class="box" src="https://unsplash.it/1280/854?image=1" alt="">
+            <img class="box" src="https://unsplash.it/1280/854?image=2" alt="">
+            <img class="box" src="https://unsplash.it/1280/854?image=3" alt="">
+            <img class="box" src="https://unsplash.it/1280/854?image=4" alt="">
+        </div>
+    </div>
+
+    <h1>2nd</h1>
+    <div class="gallery-wrapper horizontal-gallery">
+        <div class="gallery">
+            <img class="box" src="https://unsplash.it/1280/854?image=0" alt="">
+            <img class="box" src="https://unsplash.it/1280/854?image=1" alt="">
+            <img class="box" src="https://unsplash.it/1280/854?image=2" alt="">
+            <img class="box" src="https://unsplash.it/1280/854?image=3" alt="">
+            <img class="box" src="https://unsplash.it/1280/854?image=4" alt="">
+        </div>
+    </div>
+
+
+
+    <script>
+        var znapscroll = (function(w, d) {
+            'use strict';
+            var ZNAP = 'znapscroll';
+            var GALLERY = 'gallery';
+            var BOX = 'box';
+            var H = 'horizontal-gallery';
+            var isScrollSnapSupported = 'scrollSnapType' in document.documentElement.style || 'webkitScrollSnapType' in document.documentElement.style || !('classList' in document.createElement('_'));
+            var nonPolyfillable = isScrollSnapSupported || !Element.prototype.addEventListener || !window.requestAnimationFrame;
+            var scrolling = false;
+            var raf = null;
+            var timer = null;
+            var ready = false;
+            var onready = function(fn) {
+                document.addEventListener('readystatechange', function() {
+                    fn();
+                    ready = true;
+                }, false);
+            };
+            var zcroll = function(obj, Duration, To, Dir, cb) {
+                scrolling = true;
+                timer = new Date();
+                raf = requestAnimationFrame(step);
+                var Initial = obj['scroll' + Dir],
+                    Distance = Math.abs(Initial - To),
+                    StepDistance = Distance / (Duration / 15);
+
+                function step() {
+                    var From = obj['scroll' + Dir],
+                        distance = Math.abs(From - To),
+                        Direction = (To - From > 0) ? 1 : -1,
+                        nextPosition = From + (Direction * StepDistance);
+                    if (distance > StepDistance && new Date() - timer < Duration) {
+                        raf = requestAnimationFrame(step);
+                        obj['scroll' + Dir] = nextPosition;
+                    } else {
+                        obj['scroll' + Dir] = To;
+                        cancelAnimationFrame(raf);
+                        raf = null;
+                        timer = null;
+                        cb();
+                    }
+                }
+            };
+            var handler = function() {
+                if (scrolling === true) {
+                    return;
+                }
+                var $par = this,
+                    dir = $par.classList.contains(H) ? 'Left' : 'Top',
+                    off = $par.classList.contains(H) ? 'Width' : 'Height';
+                $par.removeEventListener('scroll', handler, false);
+                setTimeout(function() {
+                    var From = $par['scroll' + dir],
+                        elmOff = $par['offset' + off],
+                        newPage = Math.round(From / elmOff),
+                        To = newPage * elmOff;
+                    zcroll($par, 100, To, dir, function() {
+                        scrolling = false;
+                        $par.addEventListener('scroll', handler, false);
+                    });
+                }, 500);
+            };
+            var setup = function(obj) {
+                var $obj = obj,
+                    $par = obj.parentElement,
+                    dir = $par.classList.contains(H) ? 'Left' : 'Top',
+                    $chi = $obj.getElementsByClassName(BOX),
+                    num = $chi.length;
+                $obj.style["overflow"] = "hidden";
+                if (dir === 'Left') {
+                    $par.style["overflow-x"] = "auto";
+                    $obj.style.width = num * 100 + '%';
+                    for (var i = 0, LEN = $chi.length; i < LEN; i++) {
+                        $chi[i].style.width = 100 / num + '%';
+                    }
+                } else {
+                    $par.style["overflow-y"] = "auto";
+                    $obj.style.height = num * 100 + '%';
+                    for (var i = 0, LEN = $chi.length; i < LEN; i++) {
+                        $chi[i].style.height = 100 / num + '%';
+                    }
+                }
+                $par.addEventListener('scroll', handler, false);
+            };
+            var run = function() {
+                var galleries = d.getElementsByClassName(GALLERY);
+                for (var i = 0, LEN = galleries.length; i < LEN; i++) {
+                    if (!galleries[i].classList.contains(ZNAP)) {
+                        galleries[i].classList.add(ZNAP);
+                        setup(galleries[i]);
+                    }
+                }
+            };
+            var prepare = function() {
+                if (nonPolyfillable) {
+                    return;
+                }
+                if (ready === true) {
+                    run();
+                } else {
+                    onready(function() {
+                        run();
+                    });
+                }
+            };
+            var destroy = function(context) {
+                if (nonPolyfillable) {
+                    return;
+                }
+                var elm = (context) ? context : d;
+                var ZNAPABLE = elm.getElementsByClassName(ZNAP);
+                for (var LEN = ZNAPABLE.length, i = LEN - 1; i >= 0; i--) {
+                    var o = ZNAPABLE[i],
+                        p = o.parentElement;
+                    p.removeEventListener('scroll', handler, false);
+                    o.classList.remove(ZNAP);
+                }
+            };
+            return {
+                prepare: prepare,
+                destroy: destroy
+            };
+        }(window, window.document));
+        znapscroll.prepare();
+    </script>
+    <script>
+        var isScrollSnapSupported = 'scrollSnapType' in document.documentElement.style;
+
+        if (!isScrollSnapSupported) {
+            document.querySelector('#detection-support').innerHTML = 'does not support';
+        }
+    </script>
+
+</body>
+
+</html>
