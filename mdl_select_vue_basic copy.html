@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+<head lang="en">
+    <title>vue mdl select</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, 
+    width=device-width" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.min.js"></script>
+    <!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/0.7.13/vue-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.8.0/vue-resource.min.js"></script>
+-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+ 
+    <link rel="stylesheet" href="./assets/css/getmdl-select.min.css?v=1">
+
+    <script src="./assets/js/getmdl-select.min.js"></script>
+    <!--
+    <script defer src="https://cdn.jsdelivr.net/headroomjs/0.7.0/headroom.min.js"></script>
+    -->
+</head>
+
+<body>
+
+
+
+
+
+    <!-- mdl_vue js Select -->
+
+    <div id="example-1">
+        <div class="getmdl-select__fullwidth mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+            <input v-model="item" class="mdl-textfield__input" type="text" id="select">
+            <label for="select" class="mdl-textfield__label">Property Type</label>
+            <ul for="select" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                <li class="mdl-menu__item" v-for="item in items">{{ item.value }}</li>
+            </ul>
+
+        </div>
+
+        <span><pre>{{$data.item | json}}</pre></span>
+        
+    </div>
+
+   
+    <script>
+        
+ 
+        
+        
+      
+ new Vue({
+            el: '#example-1',
+            data: {
+    "item": null,
+    "items": [
+        {
+            "value": "Not Specified"
+        },
+        {
+            "value": "Terraced House"
+        },
+        {
+            "value": "Semi-detached house"
+        },
+        {
+            "value": "Detached house"
+        },
+        {
+            "value": "Mews house"
+        },
+        {
+            "value": "Flat"
+        },
+        {
+            "value": "Studio flat"
+        }
+    ]
+}
+        });
+
+    </script>
+</body>
+
+</html>

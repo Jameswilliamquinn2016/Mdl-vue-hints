@@ -1,0 +1,6 @@
+.getmdl-select__fix-height .mdl-menu__container{
+    overflow-y:auto;
+    max-height:20em !important
+}
+
+/*# sourceMappingURL=getmdl-select.min.css.map */
