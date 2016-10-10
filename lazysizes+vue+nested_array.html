@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta>
+    <title>lazysizes + vue + cloudinary</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/2.0.2/lazysizes.min.js" async=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+</head>
+
+<body>
+    <style>
+        img {
+            width: 400px;
+            margin: 0 auto;
+        }
+    
+    </style>
+<div id="sample">
+  <div v-if = "results.id!=null" v-for="id_value in results.id">
+      <h1>{{id_value.address}}</h1>
+  
+      <div v-for="image in id_value.images">
+          <img src="{{image.url}}" alt="" />
+          
+      </div>
+  </div>
+</div>
+    <script>
+       new Vue({
+  el: '#sample',
+  data: {
+    results: {
+      id : [
+         {
+         address : 'tooley street',
+          images : [
+            {
+               url : 'http://flgroe.com/wp-content/uploads/MG_0537_Final_Web.jpg'
+            },
+            {
+               url : 'http://webneel.com/daily/sites/default/files/images/daily/03-2013/1-best-fashion-photography-by-jeff-tse.jpg'
+            }
+          ]
+        },
+          {
+          address : 'london bridge',
+            images : [
+              {
+                url : 'http://webneel.com/daily/sites/default/files/images/daily/09-2013/13-fashion-photo-by-laura-ferreira.preview.jpg'
+              },
+              {
+                url : 'http://perzennstrom.com/wp-content/uploads/2014/11/Fashion-Photographer-Zennstrom-Kate-2.jpg'
+              }
+            ]
+          }
+      ]
+    }
+  }
+})
+    </script>
+</body>
+
+</html>
