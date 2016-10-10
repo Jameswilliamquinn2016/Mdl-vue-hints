@@ -7,81 +7,82 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/2.0.2/lazysizes.min.js" async=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-   
-
-
-
 </head>
 
 <body>
-    <style>  
- .gallery-wrapper {
-     max-width: 80em;
-     height: 0;
-     overflow-y: hidden;
-
- }
-/* gallery aspect ratio separated out */        
-.aspect_24x10 { /*Cine ratio*/
-    padding-bottom: 42.7%;
-}
-.aspect_16x9 {
-    padding-bottom: 56.3%;
-}
-.aspect_2x3 {
-    padding-bottom: 66.7%;
-}
-.aspect_3x4 {
-    padding-bottom: 75%;
-}
-.aspect_1x1 {
-    padding-bottom: 100%;
-}
-.aspect_4x3 {
-    padding-bottom: 133.3%;
-}
-.aspect_3x2 {
-    padding-bottom: 150%;
-}
-.aspect_9x16 {
-    padding-bottom: 178%;
-}
- .gallery {
-     width: 100%;
-     -webkit-scroll-behavior: smooth;
-     scroll-behavior: smooth;
-     -webkit-scroll-snap-type: mandatory;
-     scroll-snap-type: mandatory
- }
- .horizontal-gallery .gallery {
-     overflow-x: auto;
-     overflow-y: hidden;
-     white-space: nowrap;
-     -webkit-scroll-snap-points-x: repeat(100%);
-     scroll-snap-points-x: repeat(100%)
- }
- .box {
-     width: 100%;
- }
- .horizontal-gallery .box {
-     display: inline-block;
- }
- .lazyload,
- .lazyloading {
-     opacity: 0
- }
- .lazyloaded {
-     opacity: 1;
-     transition: opacity 300ms
- }
+    <style>
+        .container {
+            margin: 0 auto;
+            max-width: 80em;
+        }
+        .gallery-wrapper {
+            margin: 0;
+            width: 100%;
+            height: 0;
+            overflow-y: hidden;
+        }
+        /* gallery aspect ratio separated out */
+        
+        .aspect_24x10 {
+            /*Cine ratio*/
+            
+            padding-bottom: 42.7%;
+        }
+        .aspect_16x9 {
+            padding-bottom: 56.3%;
+        }
+        .aspect_2x3 {
+            padding-bottom: 66.7%;
+        }
+        .aspect_3x4 {
+            padding-bottom: 75%;
+        }
+        .aspect_1x1 {
+            padding-bottom: 100%;
+        }
+        .aspect_4x3 {
+            padding-bottom: 133.3%;
+        }
+        .aspect_3x2 {
+            padding-bottom: 150%;
+        }
+        .aspect_9x16 {
+            padding-bottom: 178%;
+        }
+        .gallery {
+            width: 100%;
+            -webkit-scroll-behavior: smooth;
+            scroll-behavior: smooth;
+            -webkit-scroll-snap-type: mandatory;
+            scroll-snap-type: mandatory
+        }
+        .horizontal-gallery .gallery {
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            -webkit-scroll-snap-points-x: repeat(100%);
+            scroll-snap-points-x: repeat(100%)
+        }
+        .box {
+            width: 100%;
+        }
+        .horizontal-gallery .box {
+            display: inline-block;
+        }
+        .lazyload,
+        .lazyloading {
+            opacity: 0
+        }
+        .lazyloaded {
+            opacity: 1;
+            transition: opacity 300ms
+        }
     </style>
-
-<div id="app">
-    <!-- responsive example with automatic sizes calculation: -->
-    <div class="gallery-wrapper aspect_24x10 horizontal-gallery">
-        <div class="gallery">
-            
-            <img v-for="image in images" data-sizes="auto" data-srcset="
+    <div id="app" class="container">
+        <!-- responsive example with automatic sizes calculation: -->
+        <div class="gallery-wrapper aspect_24x10 horizontal-gallery">
+            <div class="gallery">
+                <img v-for="image in images" data-sizes="auto" data-srcset="
 https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_200{{image.url}} 200w,
 https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_320{{image.url}} 320w,
 https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_481{{image.url}} 481w,
@@ -90,25 +91,37 @@ https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_768{{image.url}} 768
 https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_961{{image.url}} 961w,
 https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_1025{{image.url}} 1025w,
 https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_1281{{image.url}} 1281w" data-src="https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_1281{{image.url}}" alt="{{image.alt}}" class="lazyload box" />
-        </div> 
+            </div>
+        </div>
+        <!-- responsive example with automatic sizes calculation: -->
+        <div class="gallery-wrapper aspect_16x9 horizontal-gallery">
+            <div class="gallery">
+                <img v-for="image in images" data-sizes="auto" data-srcset="
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_200{{image.url}} 200w,
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_320{{image.url}} 320w,
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_481{{image.url}} 481w,
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_641{{image.url}} 641w,
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_768{{image.url}} 768w,
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_961{{image.url}} 961w,
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_1025{{image.url}} 1025w,
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_1281{{image.url}} 1281w" data-src="https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_1281{{image.url}}" alt="{{image.alt}}" class="lazyload box" />
+            </div>
+        </div>
+        <div class="gallery-wrapper aspect_16x9 horizontal-gallery">
+            <div class="gallery">
+                <img v-for="image in images" data-sizes="auto" data-srcset="
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_200{{image.url}} 200w,
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_320{{image.url}} 320w,
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_481{{image.url}} 481w,
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_641{{image.url}} 641w,
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_768{{image.url}} 768w,
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_961{{image.url}} 961w,
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_1025{{image.url}} 1025w,
+https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_1281{{image.url}} 1281w" data-src="https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_1281{{image.url}}" alt="{{image.alt}}" class="lazyload box" />
+            </div>
+        </div>
     </div>
-    <!-- responsive example with automatic sizes calculation: -->
-    <div class="gallery-wrapper aspect_2x3 horizontal-gallery">
-        <div class="gallery">
-            
-            <img v-for="image in images" data-sizes="auto" data-srcset="
-https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_200{{image.url}} 200w,
-https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_320{{image.url}} 320w,
-https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_481{{image.url}} 481w,
-https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_641{{image.url}} 641w,
-https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_768{{image.url}} 768w,
-https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_961{{image.url}} 961w,
-https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_1025{{image.url}} 1025w,
-https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_1281{{image.url}} 1281w" data-src="https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_1281{{image.url}}" alt="{{image.alt}}" class="lazyload box" />
-        </div> 
-    </div>    
-</div>
-<script>
+    <script>
         var app = new Vue({
             el: '#app',
             data: {
@@ -128,19 +141,18 @@ https://res.cloudinary.com/dgfb8zczt/image/upload/c_scale,w_1281{{image.url}} 12
                         alt: 'Sharp-watches_6'
                     }
                 ]
-                
+
             }
 
         })
-</script>
-
-<script>
-var znapscroll=(function(w,d){'use strict';var ZNAP='znapscroll';var GALLERY='gallery';var BOX='box';var H='horizontal-gallery';var isScrollSnapSupported='scrollSnapType'in document.documentElement.style||'webkitScrollSnapType'in document.documentElement.style||!('classList'in document.createElement('_'));var nonPolyfillable=isScrollSnapSupported||!Element.prototype.addEventListener||!window.requestAnimationFrame;var scrolling=false;var raf=null;var timer=null;var ready=false;var onready=function(fn){document.addEventListener('readystatechange',function(){fn();ready=true;},false);};var zcroll=function(obj,Duration,To,Dir,cb){scrolling=true;timer=new Date();raf=requestAnimationFrame(step);var Initial=obj['scroll'+Dir],Distance=Math.abs(Initial-To),StepDistance=Distance /(Duration / 12);function step(){var From=obj['scroll'+Dir],distance=Math.abs(From-To),Direction=(To-From>0)?1:-1,nextPosition=From+(Direction*StepDistance);if(distance>StepDistance&&new Date()-timer<Duration){raf=requestAnimationFrame(step);obj['scroll'+Dir]=nextPosition;}else{obj['scroll'+Dir]=To;cancelAnimationFrame(raf);raf=null;timer=null;cb();}}};var handler=function(){if(scrolling===true){return;}
+    </script>
+    <script>
+       var znapscroll=(function(w,d){'use strict';var ZNAP='znapscroll';var GALLERY='gallery';var BOX='box';var H='horizontal-gallery';var isScrollSnapSupported='scrollSnapType'in document.documentElement.style||'webkitScrollSnapType'in document.documentElement.style||!('classList'in document.createElement('_'));var nonPolyfillable=isScrollSnapSupported||!Element.prototype.addEventListener||!window.requestAnimationFrame;var scrolling=false;var raf=null;var timer=null;var ready=false;var onready=function(fn){document.addEventListener('readystatechange',function(){fn();ready=true;},false);};var zcroll=function(obj,Duration,To,Dir,cb){scrolling=true;timer=new Date();raf=requestAnimationFrame(step);var Initial=obj['scroll'+Dir],Distance=Math.abs(Initial-To),StepDistance=Distance /(Duration / 12);function step(){var From=obj['scroll'+Dir],distance=Math.abs(From-To),Direction=(To-From>0)?1:-1,nextPosition=From+(Direction*StepDistance);if(distance>StepDistance&&new Date()-timer<Duration){raf=requestAnimationFrame(step);obj['scroll'+Dir]=nextPosition;}else{obj['scroll'+Dir]=To;cancelAnimationFrame(raf);raf=null;timer=null;cb();}}};var handler=function(){if(scrolling===true){return;}
 var $par=this,dir=$par.classList.contains(H)?'Left':'Top',off=$par.classList.contains(H)?'Width':'Height';$par.removeEventListener('scroll',handler,false);setTimeout(function(){var From=$par['scroll'+dir],elmOff=$par['offset'+off],newPage=Math.round(From / elmOff),To=newPage*elmOff;zcroll($par,100,To,dir,function(){scrolling=false;$par.addEventListener('scroll',handler,false);});},500);};var setup=function(obj){var $obj=obj,$par=obj.parentElement,dir=$par.classList.contains(H)?'Left':'Top',$chi=$obj.getElementsByClassName(BOX),num=$chi.length;$obj.style["overflow"]="hidden";if(dir==='Left'){$par.style["overflow-x"]="auto";$obj.style.width=num*100+'%';for(var i=0,LEN=$chi.length;i<LEN;i++){$chi[i].style.width=100 / num+'%';}}else{$par.style["overflow-y"]="auto";$obj.style.height=num*100+'%';for(var i=0,LEN=$chi.length;i<LEN;i++){$chi[i].style.height=100 / num+'%';}}
 $par.addEventListener('scroll',handler,false);};var run=function(){var galleries=d.getElementsByClassName(GALLERY);for(var i=0,LEN=galleries.length;i<LEN;i++){if(!galleries[i].classList.contains(ZNAP)){galleries[i].classList.add(ZNAP);setup(galleries[i]);}}};var prepare=function(){if(nonPolyfillable){return;}
 if(ready===true){run();}else{onready(function(){run();});}};var destroy=function(context){if(nonPolyfillable){return;}
 var elm=(context)?context:d;var ZNAPABLE=elm.getElementsByClassName(ZNAP);for(var LEN=ZNAPABLE.length,i=LEN-1;i>=0;i--){var o=ZNAPABLE[i],p=o.parentElement;p.removeEventListener('scroll',handler,false);o.classList.remove(ZNAP);}};return{prepare:prepare,destroy:destroy};}(window,window.document));znapscroll.prepare();
-</script>
-
+    </script>
 </body>
+
 </html>
