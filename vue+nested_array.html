@@ -4,7 +4,9 @@
 <head>
     <meta>
     <title>lazysizes + vue + cloudinary</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/2.0.2/lazysizes.min.js" async=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/2.0.4/plugins/parent-fit/ls.parent-fit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/2.0.4/plugins/object-fit/ls.object-fit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/2.0.4/lazysizes.min.js" async=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 </head>
@@ -14,51 +16,162 @@
         img {
             width: 1166px;
         }
-    
     </style>
-<div id="sample">
-  <div v-if = "results.id!=null" v-for="id_value in results.id">
-      <h1>{{id_value.address}}</h1>
-  
-      <div v-for="image in id_value.images">
-          <img src="{{image.url}}" alt="" />
-          
-      </div>
-  </div>
-</div>
+    <div id="sample">
+        <div v-if="property!=null" v-for="item in property">
+            <pre>{{item.address | json}}</pre>
+
+            <div v-for="room in item.rooms">
+                <img src="{{room.room_photo_urls}}" alt="" />
+
+            </div>
+        </div>
+    </div>
     <script>
-       new Vue({
-  el: '#sample',
-  data: {
-    results: {
-      id : [
-         {
-         address : 'tooley street',
-          images : [
-            {
-               url : 'http://flgroe.com/wp-content/uploads/MG_0537_Final_Web.jpg'
-            },
-            {
-               url : 'http://webneel.com/daily/sites/default/files/images/daily/03-2013/1-best-fashion-photography-by-jeff-tse.jpg'
+        new Vue({
+            el: '#sample',
+            data: {
+
+                "property": [{
+                    "id": 0,
+                    "address": "tooley street",
+                    "rooms": [{
+                        "room_photo_urls": "http://flgroe.com/wp-content/uploads/MG_0537_Final_Web.jpg"
+                    }, {
+                        "room_photo_urls": "http://webneel.com/daily/sites/default/files/images/daily/03-2013/1-best-fashion-photography-by-jeff-tse.jpg"
+                    }]
+                }, {
+                    "id": 1,
+                    "address": "london bridge",
+                    "rooms": [{
+                        "room_photo_urls": "http://flgroe.com/wp-content/uploads/MG_0537_Final_Web.jpg"
+                    }, {
+                        "room_photo_urls": "http://webneel.com/daily/sites/default/files/images/daily/03-2013/1-best-fashion-photography-by-jeff-tse.jpg"
+                    }]
+                }]
+
             }
-          ]
-        },
-          {
-          address : 'london bridge',
-            images : [
-              {
-                url : 'http://webneel.com/daily/sites/default/files/images/daily/09-2013/13-fashion-photo-by-laura-ferreira.preview.jpg'
-              },
-              {
-                url : 'http://perzennstrom.com/wp-content/uploads/2014/11/Fashion-Photographer-Zennstrom-Kate-2.jpg'
-              }
-            ]
-          }
-      ]
-    }
-  }
-})
+        })
     </script>
 </body>
 
 </html>
+<!--
+[
+    {
+        "format": "jpeg",
+        "width": 5616,
+        "height": 3744,
+        "filename": "0000_yC-Yzbqy7PY.jpeg",
+        "id": 0,
+        "author": "Alejandro Escamilla",
+        "author_url": "https://unsplash.com/@alejandroescamilla",
+        "post_url": "https://unsplash.com/photos/yC-Yzbqy7PY"
+    },
+    {
+        "format": "jpeg",
+        "width": 5616,
+        "height": 3744,
+        "filename": "0001_LNRyGwIJr5c.jpeg",
+        "id": 1,
+        "author": "Alejandro Escamilla",
+        "author_url": "https://unsplash.com/@alejandroescamilla",
+        "post_url": "https://unsplash.com/photos/LNRyGwIJr5c"
+    },
+    {
+        "format": "jpeg",
+        "width": 5616,
+        "height": 3744,
+        "filename": "0002_N7XodRrbzS0.jpeg",
+        "id": 2,
+        "author": "Alejandro Escamilla",
+        "author_url": "https://unsplash.com/@alejandroescamilla",
+        "post_url": "https://unsplash.com/photos/N7XodRrbzS0"
+    },
+    {
+        "format": "jpeg",
+        "width": 5616,
+        "height": 3744,
+        "filename": "0003_Dl6jeyfihLk.jpeg",
+        "id": 3,
+        "author": "Alejandro Escamilla",
+        "author_url": "https://unsplash.com/@alejandroescamilla",
+        "post_url": "https://unsplash.com/photos/Dl6jeyfihLk"
+    },
+    {
+        "format": "jpeg",
+        "width": 5616,
+        "height": 3744,
+        "filename": "0004_y83Je1OC6Wc.jpeg",
+        "id": 4,
+        "author": "Alejandro Escamilla",
+        "author_url": "https://unsplash.com/@alejandroescamilla",
+        "post_url": "https://unsplash.com/photos/y83Je1OC6Wc"
+    },
+    {
+        "format": "jpeg",
+        "width": 5245,
+        "height": 3497,
+        "filename": "0005_LF8gK8-HGSg.jpeg",
+        "id": 5,
+        "author": "Alejandro Escamilla",
+        "author_url": "https://unsplash.com/@alejandroescamilla",
+        "post_url": "https://unsplash.com/photos/LF8gK8-HGSg"
+    },
+    {
+        "format": "jpeg",
+        "width": 5616,
+        "height": 3744,
+        "filename": "0006_tAKXap853rY.jpeg",
+        "id": 6,
+        "author": "Alejandro Escamilla",
+        "author_url": "https://unsplash.com/@alejandroescamilla",
+        "post_url": "https://unsplash.com/photos/tAKXap853rY"
+    },
+    {
+        "format": "jpeg",
+        "width": 4728,
+        "height": 3168,
+        "filename": "0007_BbQLHCpVUqA.jpeg",
+        "id": 7,
+        "author": "Alejandro Escamilla",
+        "author_url": "https://unsplash.com/@alejandroescamilla",
+        "post_url": "https://unsplash.com/photos/BbQLHCpVUqA"
+    },
+    {
+        "format": "jpeg",
+        "width": 5616,
+        "height": 3744,
+        "filename": "0008_xII7efH1G6o.jpeg",
+        "id": 8,
+        "author": "Alejandro Escamilla",
+        "author_url": "https://unsplash.com/@alejandroescamilla",
+        "post_url": "https://unsplash.com/photos/xII7efH1G6o"
+    },
+    {
+        "format": "jpeg",
+        "width": 5616,
+        "height": 3672,
+        "filename": "0009_ABDTiLqDhJA.jpeg",
+        "id": 9,
+        "author": "Alejandro Escamilla",
+        "author_url": "https://unsplash.com/@alejandroescamilla",
+        "post_url": "https://unsplash.com/photos/ABDTiLqDhJA"
+    },
+    {
+        "format": "jpeg",
+        "width": 2500,
+        "height": 1667,
+        "filename": "0010_6J--NXulQCs.jpeg",
+        "id": 10,
+        "author": "Paul Jarvis",
+        "author_url": "https://unsplash.com/@pjrvs",
+        "post_url": "https://unsplash.com/photos/6J--NXulQCs"
+    }
+]
+-->
+<!--
+    {alt": "Alejandro Escamilla",
+        "image_url": "http://perzennstrom.com/wp-content/uploads/2014/11/Fashion-Photographer-Zennstrom-Kate-2.jpg"
+    
+-->

@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta>
+    <title>lazysizes + vue + cloudinary</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/2.0.4/plugins/parent-fit/ls.parent-fit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/2.0.4/plugins/object-fit/ls.object-fit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/2.0.4/lazysizes.min.js" async=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+</head>
+
+<body>
+    <style>
+        img {
+            width: 1166px;
+        }
+    </style>
+    <div id="sample">
+        <div v-if="property!=null" v-for="item in property">
+            <address>
+            <p>{{item.address.house_name_number}}</p>
+            <p>{{item.address.address_2}}</p>
+                <p>{{item.address.address_3}}</p>
+                <p>{{item.address.address_4}}</p>
+                <p>{{item.address.town}}</p>
+                <p>{{item.address.postcode_1}} {{item.address.postcode_2}}</p>
+                </address>
+            <h2>&pound;{{item.price_information.price}}</h2>
+            <p>{{item.address.display_address}}</p>
+            <h2>Specification</h2>
+            <p>bedrroms {{item.details.bedrooms}}</p>
+            <p>bathrooms {{item.details.bathrooms}}</p>
+            <p>reception rooms {{item.details.reception_rooms}}</p>
+            <p>{{item.furnished_type}}</p>
+            <p>{{item.details.description}}</p>
+            <pre>{{item | json}}</pre>
+
+            <div v-for="room in item.rooms">
+                <img src="{{room.room_photo_urls}}" alt="" />
+
+            </div>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#sample',
+            data: {
+                "property": [{
+                    "id": 0,
+                    "description": "The URLs of images which should be associated with this room",
+                    "property_type": "Town house",
+                    "status": "Let Agreed",
+                    "create_date": "dd-MM-yyyy HH:mm:ss",
+                    "date_available": "dd-MM-yyyy",
+                    "contract_months": 12,
+                    "minimum_term": 6,
+                    "let_type": "Short term",
+                    "address": {
+                        "house_name_number": "Flat 48",
+                        "address_2": "Mundania Court",
+                        "address_3": "Forest Hill Road",
+                        "address_4": "East Dulwich",
+                        "town": "London",
+                        "postcode_1": "SE22",
+                        "postcode_2": "0NQ",
+                        "display_address": "Hans Crescent, Knightsbridge SW1X",
+                        "latitude": -0.0595532569951594,
+                        "longitude": 51.452001307664,
+                        "geojson": "http://mapit.mysociety.org/area/8325.geojson"
+                    },
+                    "price_information": {
+                        "price": "350,000",
+                        "price_qualifier": "Guide Price",
+                        "deposit": "2,500",
+                        "administration_fee": "420",
+                        "rent_frequency": "Monthly",
+                        "tenure_type": "Freehold",
+                        "tenure_unexpired_years": 78,
+                        "price_per_unit_area": 80
+                    },
+                    "details": {
+                        "summary": "The summary description of the property being sent",
+                        "description": "A first floor interior designed apartment (698 sq ft/65 sq.m aprox.) with new wooden floors throughout, in this impressive development which has retained the original Edwardian brick and stone gabled façade situated just behind Harrods. Benefiting from air conditioning, 24 hour concierge and valet parking, the accommodation comprises open plan reception room, master bedroom, bathroom with bath and stall shower. Available from the beginning of December for long term lets on a furnished basis.",
+                        "features": "Features of the property being sent",
+                        "bedrooms": 2,
+                        "bathrooms": 1,
+                        "reception_rooms": 1,
+                        "parking": "Off Street",
+                        "outside_space": "Back Garden",
+                        "year_built": "1921",
+                        "internal_area": "Total internal area of the property",
+                        "internal_area_unit": "sq ft",
+                        "land_area": "sq ft",
+                        "floors": 3,
+                        "entrance_floor": "Ground Floor"
+                    },
+                    "condition": "Work required throughout",
+                    "accessibility": "Not suitable for wheelchair users",
+                    "heating": "Central",
+                    "furnished_type": "Furnished",
+                    "pets_allowed": true,
+                    "burglar_alarm": false,
+                    "washing_machine": true,
+                    "dishwasher": true,
+                    "all_bills_inc": false,
+                    "water_bill_inc": false,
+                    "gas_bill_inc": false,
+                    "electricity_bill_inc": false,
+                    "oil_bill_inc": false,
+                    "council_tax_inc": true,
+                    "tv_licence_inc": false,
+                    "sat_cable_tv_bill_inc": false,
+                    "internet_bill_inc": false,
+                    "rooms": [{
+                        "room_name": "The name of the room",
+                        "room_description": "The specific description of that room",
+                        "room_length": "The length of the room",
+                        "room_width": "The width of the room",
+                        "room_dimension_unit": "Feet",
+                        "room_dimension_text": "Any additional description or clarification of the room dimensions",
+                        "room_photo_urls": "https://assets.foxtons.co.uk/w/1280/1474998623/nwca4347499-1.jpg"
+                    }, {
+                        "room_name": "The name of the room",
+                        "room_description": "The specific description of that room",
+                        "room_length": "The length of the room",
+                        "room_width": "The width of the room",
+                        "room_dimension_unit": "Feet",
+                        "room_dimension_text": "Any additional description or clarification of the room dimensions",
+                        "room_photo_urls": "https://assets.foxtons.co.uk/w/1280/1474998631/nwca4347499-2.jpg"
+                    }, {
+                        "room_name": "The name of the room",
+                        "room_description": "The specific description of that room",
+                        "room_length": "The length of the room",
+                        "room_width": "The width of the room",
+                        "room_dimension_unit": "Feet",
+                        "room_dimension_text": "Any additional description or clarification of the room dimensions",
+                        "room_photo_urls": "https://assets.foxtons.co.uk/w/1280/1474998648/nwca4347499-4.jpg"
+                    }, {
+                        "room_photo_urls": "https://assets.foxtons.co.uk/w/1280/1474906298/chpk4337278-1.jpg",
+                        "room_dimension_text": "Any additional description or clarification of the room dimensions"
+                    }],
+                    "media_type": "Brochure",
+                    "media_url": "https://pdf.something.com",
+                    "caption": "The caption to be displayed for this piece of media",
+                    "principal_name": "James Quinn",
+                    "principal_email_address": "The email address for the principal for this property",
+                    "principal_mobile": "071234567"
+                }, {
+                    "id": 1,
+                    "description": "The URLs of images which should be associated with this room",
+                    "property_type": "Town house",
+                    "status": "Let Agreed",
+                    "create_date": "dd-MM-yyyy HH:mm:ss",
+                    "date_available": "dd-MM-yyyy",
+                    "contract_months": 12,
+                    "minimum_term": 6,
+                    "let_type": "Short term",
+                    "address": {
+                        "house_name_number": "Flat 48",
+                        "address_2": "Mundania Court",
+                        "address_3": "Forest Hill Road",
+                        "address_4": "East Dulwich",
+                        "town": "London",
+                        "postcode_1": "SE22",
+                        "postcode_2": "0NQ",
+                        "display_address": "Mundania Court SE22",
+                        "latitude": -0.0595532569951594,
+                        "longitude": 51.452001307664,
+                        "geojson": "http://mapit.mysociety.org/area/8325.geojson"
+                    },
+                    "price_information": {
+                        "price": "350,000",
+                        "price_qualifier": "Guide Price",
+                        "deposit": "2,500",
+                        "administration_fee": "420",
+                        "rent_frequency": "Monthly",
+                        "tenure_type": "Freehold",
+                        "tenure_unexpired_years": 78,
+                        "price_per_unit_area": 80
+                    },
+                    "details": {
+                        "summary": "The summary description of the property being sent",
+                        "description": "The full description of the property being sent",
+                        "features": "Features of the property being sent",
+                        "bedrooms": 2,
+                        "bathrooms": 1,
+                        "reception_rooms": 1,
+                        "parking": "Off Street",
+                        "outside_space": "Back Garden",
+                        "year_built": "1921",
+                        "internal_area": "Total internal area of the property",
+                        "internal_area_unit": "sq ft",
+                        "land_area": "sq ft",
+                        "floors": 3,
+                        "entrance_floor": "Ground Floor"
+                    },
+                    "condition": "Work required throughout",
+                    "accessibility": "Not suitable for wheelchair users",
+                    "heating": "Central",
+                    "furnished_type": "Furnished",
+                    "pets_allowed": true,
+                    "burglar_alarm": false,
+                    "washing_machine": true,
+                    "dishwasher": true,
+                    "all_bills_inc": false,
+                    "water_bill_inc": false,
+                    "gas_bill_inc": false,
+                    "electricity_bill_inc": false,
+                    "oil_bill_inc": false,
+                    "council_tax_inc": true,
+                    "tv_licence_inc": false,
+                    "sat_cable_tv_bill_inc": false,
+                    "internet_bill_inc": false,
+                    "rooms": [{
+                        "room_name": "The name of the room",
+                        "room_description": "The specific description of that room",
+                        "room_length": "The length of the room",
+                        "room_width": "The width of the room",
+                        "room_dimension_unit": "Feet",
+                        "room_dimension_text": "Any additional description or clarification of the room dimensions",
+                        "room_photo_urls": "https://photogrist.com/wp-content/uploads/2015/01/Michael-Tang.jpg"
+                    }, {
+                        "room_name": "The name of the room",
+                        "room_description": "The specific description of that room",
+                        "room_length": "The length of the room",
+                        "room_width": "The width of the room",
+                        "room_dimension_unit": "Feet",
+                        "room_dimension_text": "Any additional description or clarification of the room dimensions",
+                        "room_photo_urls": "https://photogrist.com/wp-content/uploads/2015/01/Michael-Tang.jpg"
+                    }, {
+                        "room_name": "The name of the room",
+                        "room_description": "The specific description of that room",
+                        "room_length": "The length of the room",
+                        "room_width": "The width of the room",
+                        "room_dimension_unit": "Feet",
+                        "room_dimension_text": "Any additional description or clarification of the room dimensions",
+                        "room_photo_urls": "https://photogrist.com/wp-content/uploads/2015/01/Michael-Tang.jpg"
+                    }],
+                    "media_type": "Brochure",
+                    "media_url": "https://pdf.something.com",
+                    "caption": "The caption to be displayed for this piece of media",
+                    "principal_name": "James Quinn",
+                    "principal_email_address": "The email address for the principal for this property",
+                    "principal_mobile": "071234567"
+                }, {
+                    "id": 2,
+                    "description": "The URLs of images which should be associated with this room",
+                    "property_type": "Town house",
+                    "status": "Let Agreed",
+                    "create_date": "dd-MM-yyyy HH:mm:ss",
+                    "date_available": "dd-MM-yyyy",
+                    "contract_months": 12,
+                    "minimum_term": 6,
+                    "let_type": "Short term",
+                    "address": {
+                        "house_name_number": "Flat 48",
+                        "address_2": "Mundania Court",
+                        "address_3": "Forest Hill Road",
+                        "address_4": "East Dulwich",
+                        "town": "London",
+                        "postcode_1": "SE22",
+                        "postcode_2": "0NQ",
+                        "display_address": "Mundania Court SE22",
+                        "latitude": -0.0595532569951594,
+                        "longitude": 51.452001307664,
+                        "geojson": "http://mapit.mysociety.org/area/8325.geojson"
+                    },
+                    "price_information": {
+                        "price": "350,000",
+                        "price_qualifier": "Guide Price",
+                        "deposit": "2,500",
+                        "administration_fee": "420",
+                        "rent_frequency": "Monthly",
+                        "tenure_type": "Freehold",
+                        "tenure_unexpired_years": 78,
+                        "price_per_unit_area": 80
+                    },
+                    "details": {
+                        "summary": "The summary description of the property being sent",
+                        "description": "The full description of the property being sent",
+                        "features": "Features of the property being sent",
+                        "bedrooms": 2,
+                        "bathrooms": 1,
+                        "reception_rooms": 1,
+                        "parking": "Off Street",
+                        "outside_space": "Back Garden",
+                        "year_built": "1921",
+                        "internal_area": "Total internal area of the property",
+                        "internal_area_unit": "sq ft",
+                        "land_area": "sq ft",
+                        "floors": 3,
+                        "entrance_floor": "Ground Floor"
+                    },
+                    "condition": "Work required throughout",
+                    "accessibility": "Not suitable for wheelchair users",
+                    "heating": "Central",
+                    "furnished_type": "Furnished",
+                    "pets_allowed": true,
+                    "burglar_alarm": false,
+                    "washing_machine": true,
+                    "dishwasher": true,
+                    "all_bills_inc": false,
+                    "water_bill_inc": false,
+                    "gas_bill_inc": false,
+                    "electricity_bill_inc": false,
+                    "oil_bill_inc": false,
+                    "council_tax_inc": true,
+                    "tv_licence_inc": false,
+                    "sat_cable_tv_bill_inc": false,
+                    "internet_bill_inc": false,
+                    "rooms": [{
+                        "room_name": "The name of the room",
+                        "room_description": "The specific description of that room",
+                        "room_length": "The length of the room",
+                        "room_width": "The width of the room",
+                        "room_dimension_unit": "Feet",
+                        "room_dimension_text": "Any additional description or clarification of the room dimensions",
+                        "room_photo_urls": "https://photogrist.com/wp-content/uploads/2015/01/Michael-Tang.jpg"
+                    }, {
+                        "room_name": "The name of the room",
+                        "room_description": "The specific description of that room",
+                        "room_length": "The length of the room",
+                        "room_width": "The width of the room",
+                        "room_dimension_unit": "Feet",
+                        "room_dimension_text": "Any additional description or clarification of the room dimensions",
+                        "room_photo_urls": "https://photogrist.com/wp-content/uploads/2015/01/Michael-Tang.jpg"
+                    }, {
+                        "room_name": "The name of the room",
+                        "room_description": "The specific description of that room",
+                        "room_length": "The length of the room",
+                        "room_width": "The width of the room",
+                        "room_dimension_unit": "Feet",
+                        "room_dimension_text": "Any additional description or clarification of the room dimensions",
+                        "room_photo_urls": "https://photogrist.com/wp-content/uploads/2015/01/Michael-Tang.jpg"
+                    }],
+                    "media_type": "Brochure",
+                    "media_url": "https://pdf.something.com",
+                    "caption": "The caption to be displayed for this piece of media",
+                    "principal_name": "James Quinn",
+                    "principal_email_address": "The email address for the principal for this property",
+                    "principal_mobile": "071234567"
+                }]
+            }
+        })
+    </script>
+</body>
+
+</html>
