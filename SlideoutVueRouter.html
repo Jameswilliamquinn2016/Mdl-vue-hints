@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.1.0/milligram.min.css" />
+    <style>
+      .panel{background-color:#fff;min-height:100vh}.menu{background-color:#1D1F20}.btn-hamburger{position:absolute;top:0;left:0;background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgOTYwIDcwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgOTYwIDU2MCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGc+PHJlY3QgeD0iMjU2LjciIHk9IjI1Ni40IiBmaWxsPSIjMDAwMDAwIiB3aWR0aD0iNDM2LjEiIGhlaWdodD0iNTIuMyIvPjwvZz48Zz48cmVjdCB4PSIyNTYuNyIgeT0iMzk2IiBmaWxsPSIjMDAwMDAwIiB3aWR0aD0iNDM2LjEiIGhlaWdodD0iNTIuMyIvPjwvZz48Zz48cmVjdCB4PSIyNTYuNyIgeT0iMTE2LjkiIGZpbGw9IiMwMDAwMDAiIHdpZHRoPSI0MzYuMSIgaGVpZ2h0PSI1Mi4zIi8+PC9nPjwvc3ZnPg==);background-repeat:no-repeat;background-position:center;width:3em;height:3em}.slideout-menu{position:fixed;left:0;top:0;bottom:0;right:0;z-index:0;width:16em;overflow-y:auto;-webkit-overflow-scrolling:touch;display:none}.slideout-panel{position:relative;z-index:1;will-change:transform}.slideout-open,.slideout-open body,.slideout-open .slideout-panel{overflow:hidden}.slideout-open .slideout-menu{display:block}.slideout-menu{left:auto}.btn-hamburger{left:auto;right:.8em}
+    </style>
+    <title>Slideout right tests</title>
+</head>
+<body>
+    <div id="app">
+        <nav id="menu" class="menu">
+            <div class="container">
+                <h4>Something Old</h4>
+            </div>
+            <p>
+                <!-- use router-link component for navigation. -->
+                <!-- specify the link by passing the `to` prop. -->
+                <!-- <router-link> will be rendered as an `<a>` tag by default -->
+                <ul>
+                    <li>
+                        <router-link to="/">HOME</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/lettings">LETTINGS</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/management">PROPERTY MANAGEMENT</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/about">ABOUT US</router-link>
+                    </li>
+                    </li>
+                    <li>
+                        <router-link to="/contact">CONTACT</router-link>
+                    </li>
+
+                </ul>
+            </p>
+        </nav>
+        <main id="panel" class="panel">
+            <header class="panel-header">
+                <div class="container">
+                    <h4>Something New</h4>
+                </div>
+                <div class="btn-hamburger js-slideout-toggle"></div>
+            </header>
+
+
+
+            <!-- route outlet -->
+            <!-- component matched by the route will render here -->
+            <router-view></router-view>
+    </div>
+
+
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.0.1/vue-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.0/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.4/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/0.1.12/slideout.min.js"></script>
+    <script>
+        window.onload = function() {
+            var slideout = new Slideout({
+                'panel': document.getElementById('panel'),
+                'menu': document.getElementById('menu'),
+                'side': 'right'
+            });
+
+            document.querySelector('.js-slideout-toggle').addEventListener('click', function() {
+                slideout.toggle();
+            });
+
+            document.querySelector('.menu').addEventListener('click', function(eve) {
+                if (eve.target.nodeName === 'A') {
+                    slideout.close();
+                }
+            });
+        };
+
+        // 0. If using a module system, call Vue.use(VueRouter)
+
+        // 1. Define route components.
+        // These can be imported from other files
+        const Home = {
+            template: '<div class="container"><p>The base type is 1.6rem (16px) over 1.6 line height (24px)</p><a>Anchor</a><em>Emphasis</em><small>Small</small><strong>Strong</strong><u>Underline</u><h1>Heading</h1><h2>Heading</h2><h3>Heading</h3><h4>Heading</h4><h5>Heading</h5><h6>Heading</h6><blockquote><p><em>Yeah!! Milligram is amazing.</em></p></blockquote></div>'
+        }
+        const Lettings = {
+            template: '<div class="container"><a class="button" href="#">Default Button</a><button class="button button-outline button-large">Outlined Button</button><input class="button button-clear" type="submit" value="Clear Button"><ul><li>Unordered list item 1</li><li>Unordered list item 2</li></ul><ol><li>Ordered list item 1</li><li>Ordered list item 2</li></ol><dl><dt>Description list item 1</dt><dd>Description list item 1.1</dd></dl><form><fieldset><label for="nameField">Name</label><input type="text" placeholder="CJ Patoilo" id="nameField"><label for="commentField">Comment</label><textarea placeholder="Hi CJ …" id="commentField"></textarea><div class="float-right"><input type="checkbox" id="confirmField"><label class="label-inline" for="confirmField">Send a copy to yourself</label></div><select><option>One</option><option>Two</option><option>Three</option></select><input class="button-primary" type="submit" value="Send"></fieldset></form><table><thead><tr><th>Name</th><th>Age</th><th>Height</th><th>Location</th></tr></thead><tbody><tr><td>Stephen Curry</td><td>27</td><td>1,91</td><td>Akron, OH</td></tr><tr><td>Klay Thompson</td><td>25</td><td>2,01</td><td>Los Angeles, CA</td></tr></tbody></table></div>'
+        }
+
+        const Management = {
+            template: '<div class="container"><div class="row"><div class="column backgroundColor">.column</div><div class="column backgroundColor">.column</div><div class="column backgroundColor">.column</div><div class="column backgroundColor">.column</div></div><div class="row"><div class="column backgroundColor">.column</div><div class="column column-50 column-offset-25 backgroundColor">.column column-50 column-offset-25</div></div></div>'
+        }
+
+        const About = {
+            template: '<div class="container"><h2>Something needs to be added</h2></div>'
+        }
+
+        const Contact = {
+            template: '<div class="container"><h2>Hello, I am here</h2></div>'
+        }
+
+        // 2. Define some routes
+        // Each route should map to a component. The "component" can
+        // either be an actual component constructor created via
+        // Vue.extend(), or just a component options object.
+        // We'll talk about nested routes later.
+        const routes = [{
+            path: '/',
+            component: Home
+        }, {
+            path: '/lettings',
+            component: Lettings
+        }, {
+            path: '/management',
+            component: Management
+        }, {
+            path: '/about',
+            component: About
+        }, {
+            path: '/contact',
+            component: Contact
+        }]
+
+        // 3. Create the router instance and pass the `routes` option
+        // You can pass in additional options here, but let's
+        // keep it simple for now.
+        const router = new VueRouter({
+            routes // short for routes: routes
+        })
+
+        // 4. Create and mount the root instance.
+        // Make sure to inject the router with the router option to make the
+        // whole app router-aware.
+        const app = new Vue({
+            router
+        }).$mount('#app')
+
+        // Now the app has started!
+    </script>
+</body>
+</html>

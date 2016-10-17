@@ -4,38 +4,58 @@
 <head>
     <meta>
     <title>lazysizes + vue + cloudinary</title>
+    <!-- Since there is already a rich ecosystem of ajax libraries    -->
+    <!-- and collections of general-purpose utility methods, Vue core -->
+    <!-- is able to remain small by not reinventing them. This also   -->
+    <!-- gives you the freedom to just use what you're familiar with. -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/2.0.4/plugins/parent-fit/ls.parent-fit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/2.0.4/plugins/object-fit/ls.object-fit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/2.0.4/lazysizes.min.js" async=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/0.7.13/vue-router.min.js"></script>
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.14.0/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.2/lodash.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/headroomjs/0.7.0/headroom.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-</head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
 
-<body>
+
+</head>
     <style>
         img {
-            width: 1166px;
+            width: 960px;
+        }
+        .quotes {
+            color: red;
+            font-size: 5em;
         }
     </style>
+
+<body>
+
     <div id="sample">
         <div v-if="property!=null" v-for="item in property">
+            <!--
             <address>
             <p>{{item.address.house_name_number}}</p>
             <p>{{item.address.address_2}}</p>
-                <p>{{item.address.address_3}}</p>
-                <p>{{item.address.address_4}}</p>
-                <p>{{item.address.town}}</p>
-                <p>{{item.address.postcode_1}} {{item.address.postcode_2}}</p>
-                </address>
-            <h2>&pound;{{item.price_information.price}}</h2>
+            <p>{{item.address.address_3}}</p>
+            <p>{{item.address.address_4}}</p>
+            <p>{{item.address.town}}</p>
+            <p>{{item.address.postcode_1}} {{item.address.postcode_2}}</p>
+             </address>
+            -->
+            <h2>Guide Price &pound;{{item.price_information.price}}</h2>
             <p>{{item.address.display_address}}</p>
-            <h2>Specification</h2>
+            <h3>Specification</h3>
             <p>bedrroms {{item.details.bedrooms}}</p>
             <p>bathrooms {{item.details.bathrooms}}</p>
             <p>reception rooms {{item.details.reception_rooms}}</p>
             <p>{{item.furnished_type}}</p>
-            <p>{{item.details.description}}</p>
-            <pre>{{item | json}}</pre>
+            <p><span class="quotes">&ldquo;</span>{{item.details.description}}<span class="quotes">&rdquo;</span></p>
+          
 
             <div v-for="room in item.rooms">
                 <img src="{{room.room_photo_urls}}" alt="" />
