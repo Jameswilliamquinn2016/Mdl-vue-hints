@@ -1,0 +1,191 @@
+<!doctype html>
+<!--[if IE 8]><html class="ie8 lt-ie10"><![endif]-->
+<!--[if IE 9]><html class="ie9 lt-ie10"><![endif]-->
+<!--[if gt IE 9]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.1.0/milligram.min.css" />  
+    <style>
+body,.panel{background-color:#fff;min-height:100vh}.menu{background-color:#1D1F20}.btn-hamburger{position:absolute;top:0;left:0;background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgOTYwIDcwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgOTYwIDU2MCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGc+PHJlY3QgeD0iMjU2LjciIHk9IjI1Ni40IiBmaWxsPSIjMDAwMDAwIiB3aWR0aD0iNDM2LjEiIGhlaWdodD0iNTIuMyIvPjwvZz48Zz48cmVjdCB4PSIyNTYuNyIgeT0iMzk2IiBmaWxsPSIjMDAwMDAwIiB3aWR0aD0iNDM2LjEiIGhlaWdodD0iNTIuMyIvPjwvZz48Zz48cmVjdCB4PSIyNTYuNyIgeT0iMTE2LjkiIGZpbGw9IiMwMDAwMDAiIHdpZHRoPSI0MzYuMSIgaGVpZ2h0PSI1Mi4zIi8+PC9nPjwvc3ZnPg==);background-repeat:no-repeat;background-position:center;width:3em;height:3em}body{width:100%;height:100%}.slideout-menu{position:fixed;left:0;top:0;bottom:0;right:0;z-index:0;width:16em;overflow-y:auto;-webkit-overflow-scrolling:touch;display:none}.slideout-panel{position:relative;z-index:1;will-change:transform}.slideout-open,.slideout-open body,.slideout-open .slideout-panel{overflow:hidden}.slideout-open .slideout-menu{display:block}.slideout-menu{left:auto}.btn-hamburger{left:auto;right:0.8em}.listStyleNone li{list-style-type:none;}  
+   </style>
+<style>
+    <style> .panel-header {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+    .panel {
+        background-image: url(https://source.unsplash.com/category/technology/1280x854);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+</style>
+<title>Slideout right tests</title>
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <nav id="menu" class="menu">
+                <div class="container">
+                    <h4>Something Old</h4>
+
+                    <p>
+                        <!-- use router-link component for navigation. -->
+                        <!-- specify the link by passing the `to` prop. -->
+                        <!-- <router-link> will be rendered as an `<a>` tag by default -->
+                        <ul class="listStyleNone">
+                            <li><a v-link="{ path: '/about' }">About</a>
+                            </li>
+                            <li><a v-link="{ path: '/work' }">Work</a>
+                            </li>
+                            <li><a v-link="{ path: '/contact' }">Contact</a>
+                            </li>
+                        </ul>
+
+
+
+                    </p>
+                </div>
+
+
+
+
+
+            </nav>
+        </header>
+
+        <main id="panel" class="panel">
+            <header class="panel-header">
+                <div class="container">
+                    <h4>Something New</h4>
+                </div>
+                <div class="btn-hamburger js-slideout-toggle"></div>
+            </header>
+
+            <div class="container">
+                <router-view transition transition-mode="out-in"></router-view>
+            </div>
+
+            <template id="about-component-template">
+                <div>
+                    <h1>This is the About Section!</h1>
+                </div>
+            </template>
+
+            <template id="work-component-template">
+                <div class="work">
+                    <h1>This is the Work Section!</h1>
+                    <a v-link="{ path: '/work/subroute1' }">View SubRoute 1</a>
+                    <a v-link="{ path: '/work/subroute2' }">View SubRoute 2</a>
+                    <!-- Read about "transition mode" here: http://vuejs.org/guide/components.html#transition-mode -->
+                    <router-view transition transition-mode="out-in"></router-view>
+                </div>
+            </template>
+
+            <template id="subroute-component-template">
+                <div class="subroute" :style="{ background: color }">
+                    <p>Hey there. You've reached Work subRoute {{ number }}</p>
+                </div>
+            </template>
+
+            <template id="contact-component-template">
+                <div>
+                    <h1>This is the Contact Section!</h1>
+                </div>
+            </template>
+
+        </main>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue-router/0.7.11/vue-router.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.0/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.4/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/0.1.12/slideout.min.js"></script>
+    <script>
+        window.onload = function() {
+            var slideout = new Slideout({
+                'panel': document.getElementById('panel'),
+                'menu': document.getElementById('menu'),
+                'side': 'right'
+            });
+
+            document.querySelector('.js-slideout-toggle').addEventListener('click', function() {
+                slideout.toggle();
+            });
+
+            document.querySelector('.menu').addEventListener('click', function(eve) {
+                if (eve.target.nodeName === 'A') {
+                    slideout.close();
+                }
+            });
+        };
+
+        Vue.use(VueRouter);
+
+        var AboutComponent = Vue.extend({
+            template: "#about-component-template"
+        });
+
+        var WorkComponent = Vue.extend({
+            template: "#work-component-template"
+        });
+
+        var SubRoute1Component = Vue.extend({
+            template: '#subroute-component-template',
+            data() {
+                return {
+                    number: 1,
+                    color: "#EAFFD0"
+                }
+            }
+        });
+
+        var SubRoute2Component = Vue.extend({
+            template: '#subroute-component-template',
+            data() {
+                return {
+                    number: 2,
+                    color: "#95E1D3"
+                }
+            }
+        });
+
+        var ContactComponent = Vue.extend({
+            template: "#contact-component-template"
+        });
+
+        var router = new VueRouter();
+
+        router.map({
+            '/about': {
+                component: AboutComponent
+            },
+            '/work': {
+                component: WorkComponent,
+                subRoutes: {
+                    '/subroute1': {
+                        component: SubRoute1Component
+                    },
+                    'subroute2': {
+                        component: SubRoute2Component
+                    }
+                }
+            },
+            '/contact': {
+                component: ContactComponent
+            }
+        });
+
+        var App = Vue.extend({});
+        router.start(App, "#app");
+    </script>
+</body>
+
+</html>
