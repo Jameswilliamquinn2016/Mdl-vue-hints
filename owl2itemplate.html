@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Owl carousel numbered pagination - pure css method</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/normalize/5.0.0/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.2.0/milligram.min.css">
+    <style>
+        .owl-item{float:left}.owl-item img{display:block;width:100%}.prev{position:absolute;top:0;left:0;width:50%;height:100%;cursor:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAFVBMVEX/////AAD/AAD/AAD/AAD/AAD/AACVozFVAAAABnRSTlMAIEBgf7+P3XCsAAAAKklEQVR42u3LsREAMAgDMSeE7D8yE7jjKLhXLwEABqQTcr7zOst1jgDsUhcxAehlaZBeAAAAAElFTkSuQmCC)26 26, auto}.next{position:absolute;top:0;right:0;width:50%;height:100%;cursor:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAIVBMVEX/AAD/////AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AACRnsi+AAAACnRSTlMAABBAYH+Pn7/PE5UQiAAAAExJREFUSMft1SsOACAMRMHC8u39Dwy2NQSCIGGf3DCqAgnbCQnJCREXgOimFVFVkJB8QVKzTdLtUjzJuqpdIMi2+abaJfGUJCSv/sgD+oENaQHVH2kAAAAASUVORK5CYII=)26 26, auto}.lazyload,.lazyloading{opacity:0}.lazyloaded{opacity:1;transition:opacity 300ms}.responsive{position:relative;display:block;width:100%;height:0;background-color:lightgrey;overflow-y:hidden}.responsive img{width:100%}.responsive{padding-bottom:40%}.owl-dots{counter-reset:slides-num}.owl-dots:after{content:counter(slides-num);display:inline-block;font-size:1em}.owl-dot{display:inline-block;counter-increment:slides-num}.owl-dot.active:before{content:counter(slides-num) "/";display:inline-block;font-size:1em}.owl-next,.owl-prev{display:none}
+    </style>
+</head>
+
+<body>
+    <div class="owl-carousel">
+        <div class="responsive">
+            <span class="prev"></span>
+            <span class="next"></span>
+            <img class=" lazyload" data-src="http://fashionphotographyblog.com/wp-content/uploads/yohji_butterfly.jpg" alt="">
+        </div>
+        <div class="responsive">
+            <span class="prev"></span>
+            <span class="next"></span>
+            <img class=" lazyload" data-src="http://www.carlton-photography.co.uk/wp-content/uploads/2013/11/urban-fashion-photography-shot-on-location-in-manchester.jpg" alt="">
+        </div>
+        <div class="responsive">
+            <span class="prev"></span>
+            <span class="next"></span>
+            <img class=" lazyload" data-src="http://www.redphoto.com/media/original/redinger_libolt_F053-copy1.jpg" alt="">
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/lazysizes/2.0.7/lazysizes.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/g/vue@2.0.5(vue.runtime.min.js),vue.router@2.0.2"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.slim.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.0/owl.carousel.min.js'></script>
+    <script>
+        $(".owl-carousel").owlCarousel({
+            margin: 10,
+            loop: true,
+            dots: true,
+            nav: false,
+            items: 1
+        });
+    </script>
+</body>
+
+</html>
